@@ -1,4 +1,4 @@
-# # Laravel Tranzzo
+### Laravel Tranzzo
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/artjoker/laravel-tranzzo.svg?style=flat-square)](https://packagist.org/packages/artjoker/laravel-tranzzo)
 [![Total Downloads](https://img.shields.io/packagist/dt/artjoker/laravel-tranzzo.svg?style=flat-square)](https://packagist.org/packages/artjoker/laravel-tranzzo)
