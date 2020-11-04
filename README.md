@@ -19,8 +19,11 @@ php artisan vendor:publish --provider="Artjoker\LaravelTranzzo\TranzzoServicePro
 
 Set environment variable (`.env`)
 ```
-RISK_TOOLS_URL=
-RISK_TOOLS_KEY=
+TRANZZO_API_URL=https://cpay.tranzzo.com/api/v1
+TRANZZO_POS_ID=
+TRANZZO_API_KEY=
+TRANZZO_API_SECRET=
+TRANZZO_ENDPOINTS_KEY=
 ```
 
 ## Usage
@@ -31,10 +34,6 @@ RISK_TOOLS_KEY=
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
 
-## Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
 ### Security
 
 If you discover any security related issues, please email v.taranenko@artjoker.net instead of using the issue tracker.
@@ -42,7 +41,6 @@ If you discover any security related issues, please email v.taranenko@artjoker.n
 ## Credits
 
 - [Volodymyr Taranenko](https://github.com/VT2)
-- [All Contributors](../../contributors)
 
 ## License
 

@@ -1,0 +1,48 @@
+{
+  "name": "artjoker/laravel-tranzzo",
+  "description": "Integration of Tranzzo payment service for Laravel",
+  "keywords": [
+    "artjoker",
+    "laravel-tranzzo"
+  ],
+  "homepage": "https://github.com/artjoker/laravel-tranzzo",
+  "license": "MIT",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Volodymyr Taranenko",
+      "email": "v.taranenko@artjoker.net",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": "^7.2",
+    "illuminate/support": "5.6.*|5.7.*|5.8.*|^6.0|^7.0|^8.0",
+    "nesbot/carbon": "^2.16",
+    "ext-curl": "*",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Artjoker\\LaravelTranzzo\\": "src"
+    }
+  },
+  "minimum-stability": "stable",
+  "scripts": {
+    "test": "vendor/bin/phpunit",
+    "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Artjoker\\LaravelTranzzo\\TranzzoServiceProvider"
+      ],
+      "aliases": {
+        "LaravelTranzzo": "Artjoker\\LaravelTranzzo\\Facades\\Tranzzo"
+      }
+    }
+  }
+}
