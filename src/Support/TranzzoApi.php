@@ -2,6 +2,8 @@
 
     namespace Artjoker\LaravelTranzzo\Support;
 
+    use Illuminate\Support\Facades\Log;
+
     /**
      * Class TranzzoApi
      * @package Artjoker\LaravelTranzzo\Providers
@@ -242,6 +244,8 @@
         }
 
         /**
+         * @param $type_payment
+         *
          * @return mixed
          */
         public function createPaymentHosted($type_payment)
@@ -271,32 +275,28 @@
         //new
         public function createVoid($params = [])
         {
-            self::writeLog('createVoid');
+            self::writeLog('createVoid', '');
             $params[self::P_REQ_POS_ID] = $this->posId;
 
             $this->setHeader('Accept: application/json');
             $this->setHeader('Content-Type: application/json');
 
-            self::writeLog(['posId' => $params[self::P_REQ_POS_ID]]);
-            self::writeLog(['ord' => $this->provider_order_id]);
+            self::writeLog('POS_ID', ['posId' => $params[self::P_REQ_POS_ID]]);
+            self::writeLog('createVoid -> params', ['params' => $params]);
 
-            self::writeLog(['$params' => $params]);
-//        self::writeLog(array('this ser' => (array)$this));
             return $this->request(self::R_METHOD_POST, self::U_METHOD_VOID, $params);
         }
 
         public function createCapture($params = [])
         {
-            self::writeLog('createCapture');
+            self::writeLog('createCapture', '');
             $params[self::P_REQ_POS_ID] = $this->posId;
             $this->setHeader('Accept: application/json');
             $this->setHeader('Content-Type: application/json');
 
-//        self::writeLog(array('posId' => $params[self::P_REQ_POS_ID]));
-            self::writeLog(['ord' => $this->provider_order_id]);
+            self::writeLog('POS_ID', ['posId' => $params[self::P_REQ_POS_ID]]);
+            self::writeLog('createCapture -> params', ['params' => $params]);
 
-            self::writeLog(['$params' => $params]);
-            self::writeLog(['this ser' => (array)$this]);
             return $this->request(self::R_METHOD_POST, self::U_METHOD_CAPTURE, $params);
         }
         //new
@@ -326,10 +326,10 @@
             $data   = json_encode($params);
 
             if (json_last_error()) {
-                self::writeLog(json_last_error(), 'json_last_error', 'error');
-                self::writeLog(json_last_error_msg(), 'json_last_error_msg', 'error');
+                self::writeLog('json_last_error', json_last_error(), 'error');
+                self::writeLog('json_last_error_msg', json_last_error_msg(), 'error');
             }
-//        self::writeLog(array('$this' => (array)$this));
+
             $this->setHeader('X-API-Auth: CPAY ' . $this->apiKey . ':' . $this->apiSecret);
             $this->setHeader('X-API-KEY: ' . $this->endpointsKey);
 
@@ -353,14 +353,11 @@
             curl_close($ch);
 
             // for check request лог
-            self::writeLog($url, '', '');
-            self::writeLog(['params' => $params]);
-//        self::writeLog($method, 'method1');
-//        self::writeLog(self::R_METHOD_POST, 'method2');
+            self::writeLog('Request URL', $url);
+            self::writeLog('Request params', ['params' => $params]);
 
-
-//        self::writeLog(array('headers' => $this->headers));
-//        self::writeLog(array("httpcode" => $http_code, "errno" => $errno));
+//        self::writeLog('Request headers', array('headers' => $this->headers));
+//        self::writeLog('Request httpcode', array("httpcode" => $http_code, "errno" => $errno));
             self::writeLog('response', $server_response);
 
             if (!$errno && empty($server_response)) {
@@ -377,7 +374,7 @@
          */
         public function createRefund($params = [])
         {
-            self::writeLog('createRefund');
+            self::writeLog('createRefund', '');
             $params[self::P_REQ_POS_ID] = $this->posId;
 
             $this->setHeader('Accept: application/json');
@@ -476,7 +473,7 @@
 
         /**
          * @param string $value
-         * @param int    $round
+         * @param        $round
          *
          * @return float
          */
@@ -487,20 +484,21 @@
         }
 
         /**
-         * @param           $data
-         * @param string    $flag
-         * @param string    $filename
-         * @param bool|true $append
+         * @param        $message
+         * @param        $data
+         * @param string $type
          */
-        static function writeLog($data, $flag = '', $filename = '', $append = true)
+        static function writeLog($message, $data, $type = 'info')
         {
-            $show = false;
-            if ($show) {
-                $filename = !empty($filename) ? strval($filename) : basename(__FILE__);
-                file_put_contents(__DIR__ . "/{$filename}.log", "\n\n" . date('H:i:s') . " - $flag \n" .
-                    (is_array($data) ? json_encode($data, JSON_PRETTY_PRINT) : $data)
-                    , ($append ? FILE_APPEND : 0)
-                );
+            if (config('tranzzo.log_enabled')) {
+                if(!isset($data)){ $data = ''; }
+                $data = is_array($data) ? json_encode($data, JSON_PRETTY_PRINT) : $data;
+                if ($type == 'error') {
+                    Log::error('TranzzoApi: ' . $message . ' | ' . $data);
+                } else {
+                    Log::info('TranzzoApi: ' . $message . ' | ' . $data);
+                }
+
             }
         }
 

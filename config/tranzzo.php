@@ -15,4 +15,6 @@
         'api_secret'    => env('TRANZZO_API_SECRET', null),
         'endpoints_key' => env('TRANZZO_ENDPOINTS_KEY', null),
 
+        'log_enabled' => true,
+
     ];
