@@ -1,12 +1,12 @@
 <?php
 
-    namespace Artjoker\LaravelTranzzo\Facades;
+    namespace Vt2\LaravelTranzzo\Facades;
 
     use Illuminate\Support\Facades\Facade;
 
     /**
      * Class Tranzzo
-     * @package Artjoker\LaravelTranzzo\Facades
+     * @package Vt2\LaravelTranzzo\Facades
      */
     class Tranzzo extends Facade
     {

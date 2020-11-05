@@ -1,13 +1,13 @@
 <?php
 
-    namespace Artjoker\LaravelTranzzo;
+    namespace Vt2\LaravelTranzzo;
 
-    use Artjoker\LaravelTranzzo\Support\TranzzoApi as AbstractTranzzo;
+    use Vt2\LaravelTranzzo\Support\TranzzoApi as AbstractTranzzo;
     use Illuminate\Support\Facades\Config;
 
     /**
      * Class Tranzzo
-     * @package Artjoker\LaravelTranzzo
+     * @package Vt2\LaravelTranzzo
      */
     class Tranzzo
     {
