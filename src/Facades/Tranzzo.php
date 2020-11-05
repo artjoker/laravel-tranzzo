@@ -17,6 +17,6 @@
          */
         protected static function getFacadeAccessor(): string
         {
-            return 'Tranzzo';
+            return 'laravelTranzzo';
         }
     }

@@ -10,7 +10,7 @@ Integration of Tranzzo payment service for Laravel
 You can install the package via composer:
 
 ```
-composer require Vt2/laravel-tranzzo
+composer require vt2/laravel-tranzzo
 ```
 You can publish the config file:
 ```
