@@ -312,6 +312,16 @@
         }
 
         /**
+         * @return mixed
+         */
+        public function checkStatus()
+        {
+            $uri = self::U_METHOD_POS . '/' . $this->posId . '/orders/0';
+
+            return $this->request(self::R_METHOD_GET, $uri, []);
+        }
+
+        /**
          * @param $params
          *
          * @return mixed
@@ -492,7 +502,7 @@
         {
             if (config('tranzzo.log_enabled')) {
                 if(!isset($data)){ $data = ''; }
-                $data = is_array($data) ? json_encode($data, JSON_PRETTY_PRINT) : $data;
+                $data = is_array($data) ? json_encode($data, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE) : $data;
                 if ($type == 'error') {
                     Log::error('TranzzoApi: ' . $message . ' | ' . $data);
                 } else {

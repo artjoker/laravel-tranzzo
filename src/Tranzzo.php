@@ -33,7 +33,7 @@
          */
         public function test()
         {
-            $data = $this->client->checkPaymentStatus();
+            $data = $this->client->checkStatus();
             return json_encode($data, TRUE);
         }
 
