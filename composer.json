@@ -46,7 +46,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Vt2\\LaravelTranzzo\\TranzzoScoringServiceProvider"
+        "Vt2\\LaravelTranzzo\\TranzzoServiceProvider"
       ],
       "aliases": {
         "LaravelScoring": "Vt2\\LaravelTranzzo\\Facades\\Tranzzo"
