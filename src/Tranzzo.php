@@ -60,6 +60,47 @@
         }
 
         /**
+         * @param $data
+         * @param $requestSign
+         *
+         * @return bool
+         */
+        public function validateSignature($data, $requestSign)
+        {
+            return $this->client->validateSignature($data, $requestSign);
+        }
+
+        /**
+         * @param $data
+         *
+         * @return string
+         */
+        public function base64url_encode($data)
+        {
+            return $this->client->base64url_encode($data);
+        }
+
+        /**
+         * @param $data
+         *
+         * @return bool|string
+         */
+        public function base64url_decode($data)
+        {
+            return $this->client->base64url_decode($data);
+        }
+
+        /**
+         * @param $data
+         *
+         * @return mixed
+         */
+        public function parseDataResponse($data)
+        {
+            return $this->client->parseDataResponse($data);
+        }
+
+        /**
          * test
          */
         public function test()
