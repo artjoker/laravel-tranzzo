@@ -60,6 +60,32 @@
         }
 
         /**
+         * Void
+         *
+         * @param array $fields
+         *
+         * @return mixed
+         */
+        public function voidOrder($fields = [])
+        {
+            $data = $this->client->createVoid($fields);
+            return json_encode($data, TRUE);
+        }
+
+        /**
+         * Capture order
+         *
+         * @param array $fields
+         *
+         * @return mixed
+         */
+        public function captureOrder($fields = [])
+        {
+            $data = $this->client->createCapture($fields);
+            return json_encode($data, TRUE);
+        }
+
+        /**
          * @param $data
          * @param $requestSign
          *

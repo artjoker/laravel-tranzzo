@@ -11,6 +11,7 @@
 
         'api_url'       => env('TRANZZO_API_URL', 'https://cpay.tranzzo.com/api/v1'),
         'endpoints_key' => env('TRANZZO_ENDPOINTS_KEY', null),
+        'widget_key'    => env('TRANZZO_WIDGET_KEY', null),
 
         'pay' => [
             'pos_id'     => env('TRANZZO_POS_ID', null),
