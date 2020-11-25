@@ -30,10 +30,10 @@
          */
         public function register()
         {
-            $this->mergeConfigFrom(__DIR__ . '/../config/tranzzo.php', 'scoring');
+            $this->mergeConfigFrom(__DIR__ . '/../config/tranzzo.php', 'tranzzo');
 
             // Register the service the package provides.
-            $this->app->singleton('Tranzzo', function ($app) {
+            $this->app->singleton('laravelTranzzo', function ($app) {
                 return new Tranzzo;
             });
         }
@@ -45,7 +45,7 @@
          */
         public function provides()
         {
-            return ['Tranzzo'];
+            return ['laravelTranzzo'];
         }
 
         /**
