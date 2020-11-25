@@ -1,12 +1,12 @@
 <?php
 
-    namespace Vt2\LaravelTranzzo\Support;
+    namespace Artjoker\LaravelTranzzo\Support;
 
     use Illuminate\Support\Facades\Log;
 
     /**
      * Class TranzzoApi
-     * @package Vt2\LaravelTranzzo\Providers
+     * @package Artjoker\LaravelTranzzo\Providers
      */
     class TranzzoApi
     {

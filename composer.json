@@ -1,11 +1,11 @@
 {
-  "name": "vt2/laravel-tranzzo",
+  "name": "artjoker/laravel-tranzzo",
   "description": "Integration of Tranzzo systems for Laravel",
   "keywords": [
-    "vt2",
+    "artjoker",
     "laravel-tranzzo"
   ],
-  "homepage": "https://github.com/VT2/laravel-tranzzo",
+  "homepage": "https://github.com/artjoker/laravel-tranzzo",
   "license": "MIT",
   "type": "library",
   "authors": [
@@ -27,12 +27,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Vt2\\LaravelTranzzo\\": "src"
+      "Artjoker\\LaravelTranzzo\\": "src"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Vt2\\LaravelTranzzo\\Tests\\": "tests"
+      "Artjoker\\LaravelTranzzo\\Tests\\": "tests"
     }
   },
   "scripts": {
@@ -46,10 +46,10 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Vt2\\LaravelTranzzo\\TranzzoServiceProvider"
+        "Artjoker\\LaravelTranzzo\\TranzzoServiceProvider"
       ],
       "aliases": {
-        "LaravelScoring": "Vt2\\LaravelTranzzo\\Facades\\Tranzzo"
+        "LaravelScoring": "Artjoker\\LaravelTranzzo\\Facades\\Tranzzo"
       }
     }
   }

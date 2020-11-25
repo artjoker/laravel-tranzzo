@@ -1,12 +1,12 @@
 <?php
 
-    namespace Vt2\LaravelTranzzo;
+    namespace Artjoker\LaravelTranzzo;
 
     use Illuminate\Support\ServiceProvider;
 
     /**
      * Class TranzzoServiceProvider
-     * @package Vt2\LaravelTranzzo
+     * @package Artjoker\LaravelTranzzo
      */
     class TranzzoServiceProvider extends ServiceProvider
     {
