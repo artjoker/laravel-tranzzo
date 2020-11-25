@@ -212,6 +212,16 @@
         }
 
         /**
+         * set custom params
+         *
+         * @param array $value
+         */
+        public function setParams($value = [])
+        {
+            $this->params = is_array($value) ? $value : [];
+        }
+
+        /**
          * set custom value
          *
          * @param string $value
@@ -234,13 +244,39 @@
          */
         public function createCreditPayment()
         {
+            self::writeLog('createCreditPayment', '');
+            $this->params[self::P_REQ_MODE]   = self::P_MODE_DIRECT;
             $this->params[self::P_REQ_METHOD] = 'credit';
             $this->params[self::P_REQ_POS_ID] = $this->posId;
+            $this->params[self::P_REQ_ORDER_3DS_BYPASS] = 'never';
 
             $uri = self::U_METHOD_PAYMENT;
             $this->setHeader('Content-Type:application/json');
 
             return $this->request(self::R_METHOD_POST, $uri);
+        }
+
+        /**
+         * @param $type_payment
+         *
+         * @return mixed
+         */
+        public function createPaymentDirect($type_payment)
+        {
+            self::writeLog('createPaymentDirect', '');
+            $this->params[self::P_REQ_MODE]   = self::P_MODE_DIRECT;
+            $this->params[self::P_REQ_POS_ID] = $this->posId;
+
+            $this->setHeader('Accept: application/json');
+            $this->setHeader('Content-Type: application/json');
+
+            if (empty($type_payment)) {
+                $this->params[self::P_REQ_METHOD] = self::P_METHOD_PURCHASE;
+            } else {
+                $this->params[self::P_REQ_METHOD] = self::P_METHOD_AUTH;
+            }
+            self::writeLog('name type_payment', $this->params[self::P_REQ_METHOD]);
+            return $this->request(self::R_METHOD_POST, self::U_METHOD_PAYMENT);
         }
 
         /**
@@ -307,6 +343,16 @@
         public function checkPaymentStatus()
         {
             $uri = self::U_METHOD_POS . '/' . $this->posId . '/orders/' . $this->params[self::P_REQ_ORDER];
+
+            return $this->request(self::R_METHOD_GET, $uri, []);
+        }
+
+        /**
+         * @return mixed
+         */
+        public function checkStatus()
+        {
+            $uri = self::U_METHOD_POS . '/' . $this->posId . '/orders/0';
 
             return $this->request(self::R_METHOD_GET, $uri, []);
         }
@@ -492,7 +538,7 @@
         {
             if (config('tranzzo.log_enabled')) {
                 if(!isset($data)){ $data = ''; }
-                $data = is_array($data) ? json_encode($data, JSON_PRETTY_PRINT) : $data;
+                $data = is_array($data) ? json_encode($data, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE) : $data;
                 if ($type == 'error') {
                     Log::error('TranzzoApi: ' . $message . ' | ' . $data);
                 } else {
