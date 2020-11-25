@@ -20,10 +20,19 @@ php artisan vendor:publish --provider="Vt2\LaravelTranzzo\TranzzoServiceProvider
 Set environment variable (`.env`)
 ```
 TRANZZO_API_URL=https://cpay.tranzzo.com/api/v1
+TRANZZO_ENDPOINTS_KEY=
+TRANZZO_WIDGET_KEY=
+
+# client to merchant (payment)
 TRANZZO_POS_ID=
 TRANZZO_API_KEY=
 TRANZZO_API_SECRET=
-TRANZZO_ENDPOINTS_KEY=
+
+# merchant to client (credit)
+TRANZZO_CREDIT_POS_ID=
+TRANZZO_CREDIT_API_KEY=
+TRANZZO_CREDIT_API_SECRET=
+
 ```
 
 ## Usage
