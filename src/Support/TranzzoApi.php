@@ -32,6 +32,7 @@
         //new
         const P_METHOD_PURCHASE = 'purchase';
         const P_METHOD_AUTH     = 'auth';
+        const P_METHOD_LOOKUP   = 'lookup';
         const P_METHOD_CAPTURE  = 'capture';
         //new
 
@@ -245,9 +246,9 @@
         public function createCreditPayment()
         {
             self::writeLog('createCreditPayment', '');
-            $this->params[self::P_REQ_MODE]   = self::P_MODE_DIRECT;
-            $this->params[self::P_REQ_METHOD] = 'credit';
-            $this->params[self::P_REQ_POS_ID] = $this->posId;
+            $this->params[self::P_REQ_MODE]             = self::P_MODE_DIRECT;
+            $this->params[self::P_REQ_METHOD]           = 'credit';
+            $this->params[self::P_REQ_POS_ID]           = $this->posId;
             $this->params[self::P_REQ_ORDER_3DS_BYPASS] = 'never';
 
             $uri = self::U_METHOD_PAYMENT;
@@ -270,8 +271,11 @@
             $this->setHeader('Accept: application/json');
             $this->setHeader('Content-Type: application/json');
 
+            self::writeLog('type_payment', $type_payment);
             if (empty($type_payment)) {
                 $this->params[self::P_REQ_METHOD] = self::P_METHOD_PURCHASE;
+            } elseif ($type_payment == self::P_METHOD_LOOKUP) {
+                $this->params[self::P_REQ_METHOD] = self::P_METHOD_LOOKUP;
             } else {
                 $this->params[self::P_REQ_METHOD] = self::P_METHOD_AUTH;
             }
@@ -537,7 +541,9 @@
         static function writeLog($message, $data, $type = 'info')
         {
             if (config('tranzzo.log_enabled')) {
-                if(!isset($data)){ $data = ''; }
+                if (!isset($data)) {
+                    $data = '';
+                }
                 $data = is_array($data) ? json_encode($data, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE) : $data;
                 if ($type == 'error') {
                     Log::error('TranzzoApi: ' . $message . ' | ' . $data);
