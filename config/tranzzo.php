@@ -25,6 +25,12 @@
             'api_secret' => env('TRANZZO_CREDIT_API_SECRET', null),
 
         ],
+        'verify' => [
+            'pos_id'     => env('TRANZZO_VERIFY_POS_ID', null),
+            'api_key'    => env('TRANZZO_VERIFY_API_KEY', null),
+            'api_secret' => env('TRANZZO_VERIFY_API_SECRET', null),
+
+        ],
 
         'log_enabled' => true,
 
